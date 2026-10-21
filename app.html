@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>App Tutor Studenti – Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF1FA;--card:#fff;--ink:#1B2140;--mut:#5C6485;--line:#DDE1EF;--ac:#3347E8;--acs:#E4E8FF;--onac:#fff;--g:#1E9E5E;--y:#B07800;--r:#D6343B;--gs:#DDF4E7;--ys:#FFF1CC;--rs:#FDE1E2;--land:#EEF0E8;--road:#fff;--water:#B9D6F2;--park:#C9E6C3;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B0E20;--card:#171B38;--ink:#EDEFFA;--mut:#9AA2C6;--line:#2A3058;--ac:#8C9BFF;--acs:#262C5E;--onac:#0B0E20;--g:#4CD08A;--y:#F2B72E;--r:#FF7A80;--gs:#14362A;--ys:#3A3014;--rs:#3F1D21}}
+:root[data-theme="dark"]{--bg:#0B0E20;--card:#171B38;--ink:#EDEFFA;--mut:#9AA2C6;--line:#2A3058;--ac:#8C9BFF;--acs:#262C5E;--onac:#0B0E20;--g:#4CD08A;--y:#F2B72E;--r:#FF7A80;--gs:#14362A;--ys:#3A3014;--rs:#3F1D21}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.45}
+#app{height:100%;max-width:430px;margin:0 auto;display:flex;flex-direction:column;background:var(--bg);position:relative}
+@media(min-width:700px){body{padding:20px 0}#app{height:min(860px,100%);border:1px solid var(--line);border-radius:30px;overflow:hidden;box-shadow:0 20px 60px rgba(20,25,70,.18)}}
+header{padding:14px 18px 8px;display:flex;align-items:center;gap:10px}
+header h1{font-size:19px;margin:0;font-weight:700;flex:1;letter-spacing:-.01em}
+.back{border:0;background:var(--acs);color:var(--ac);border-radius:10px;width:34px;height:34px;font:inherit;font-size:18px;cursor:pointer}
+main{flex:1;overflow-y:auto;padding:4px 18px 22px}
+.scr[hidden]{display:none}
+h2{font-size:15px;margin:20px 0 8px;font-weight:600}
+p{margin:0 0 8px}
+.mut{color:var(--mut);font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
+.row{display:flex;align-items:center;gap:10px}.sp{flex:1}
+.btn{border:0;border-radius:12px;padding:11px 16px;font:inherit;font-weight:600;background:var(--ac);color:var(--onac);cursor:pointer;width:100%}
+.btn.sec{background:var(--acs);color:var(--ac)}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ac);color:var(--onac);border-color:var(--ac)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.badge{display:inline-block;border-radius:8px;padding:2px 8px;font-size:12px;font-weight:600}
+.b-g{background:var(--gs);color:var(--g)}.b-y{background:var(--ys);color:var(--y)}.b-r{background:var(--rs);color:var(--r)}.b-a{background:var(--acs);color:var(--ac)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.hero{background:var(--ac);color:var(--onac);border-radius:20px;padding:18px;margin-bottom:12px}
+.hero .big{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin:4px 0}
+.hero .mut{color:inherit;opacity:.85}
+.link{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px;margin-bottom:8px;font:inherit;color:inherit;cursor:pointer}
+.ic{width:38px;height:38px;border-radius:11px;background:var(--acs);color:var(--ac);display:grid;place-items:center;flex:none}
+.ic svg,nav svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+nav{display:flex;border-top:1px solid var(--line);background:var(--card);padding:6px 4px}
+nav button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;cursor:pointer;border-radius:10px}
+nav button[aria-current="page"]{color:var(--ac);font-weight:600}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:10px}
+.day{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:7px 0;text-align:center;font:inherit;font-size:12px;color:var(--ink);cursor:pointer}
+.day b{display:block;font-size:15px}.day[aria-pressed="true"]{background:var(--ac);color:var(--onac);border-color:var(--ac)}
+.dots{display:flex;justify-content:center;gap:2px;height:6px;margin-top:3px}.dots i{width:5px;height:5px;border-radius:50%;background:var(--y)}
+.task{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}
+.task input{width:20px;height:20px;accent-color:var(--ac)}.task.done span{text-decoration:line-through;color:var(--mut)}
+input[type=text],input[type=password],input[type=date],textarea,select{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.fld{display:flex;gap:6px;margin-top:8px}
+.sl{margin:12px 0}.sl label{display:flex;justify-content:space-between;font-weight:500;margin-bottom:4px}
+input[type=range]{width:100%;accent-color:var(--ac)}
+.light{display:flex;align-items:center;gap:12px}
+.lamp{width:54px;height:54px;border-radius:50%;flex:none}
+.bars{display:flex;align-items:flex-end;gap:8px;height:84px;margin-top:6px}
+.bars div{flex:1;border-radius:6px 6px 0 0;background:var(--acs);position:relative;min-height:6px}
+.bars div.hi{background:var(--ac)}.bars small{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:10px;color:var(--mut)}
+.seg{display:flex;background:var(--acs);border-radius:12px;padding:3px;margin-bottom:12px}
+.seg button{flex:1;border:0;background:none;padding:8px;border-radius:9px;font:inherit;font-weight:600;color:var(--ac);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.map{background:var(--acs);border-radius:16px;margin-bottom:10px;overflow:hidden}
+.map svg{display:block;width:100%;height:auto}
+.pin{cursor:pointer}
+.prog{height:10px;border-radius:6px;background:var(--acs);overflow:hidden;margin:6px 0}.prog i{display:block;height:100%;background:var(--ac)}
+.pl{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}.pl:last-child{border:0}
+.play{width:36px;height:36px;border-radius:50%;border:0;background:var(--ac);color:var(--onac);cursor:pointer;flex:none;font-size:13px}
+.lock{opacity:.7}
+#toast{position:absolute;left:18px;right:18px;bottom:78px;background:var(--ink);color:var(--bg);padding:11px 14px;border-radius:12px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+.av{width:34px;height:34px;border-radius:50%;border:0;background:var(--ac);color:var(--onac);font:inherit;font-weight:700;font-size:13px;cursor:pointer}
+.av.big{width:54px;height:54px;font-size:18px;display:grid;place-items:center;flex:none}
+.sw{display:flex;gap:12px;margin-top:8px}.swb{width:38px;height:38px;border-radius:50%;border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);cursor:pointer}.swb[aria-pressed="true"]{box-shadow:0 0 0 3px var(--ink)}
+.tg{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.tg:last-child{border:0}.tg input{width:22px;height:22px;accent-color:var(--ac)}
+.zoom{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:4px}.zoom button{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:17px;cursor:pointer}
+.opt{display:block;width:100%;text-align:left;padding:12px 14px;margin-bottom:8px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;cursor:pointer}.opt[aria-pressed="true"]{border-color:var(--ac);background:var(--acs);font-weight:600}
+.btn:disabled{opacity:.45;cursor:not-allowed}#qz .row{margin-top:6px}#qz .row .btn{width:auto;flex:1}
+[hidden]{display:none!important}
+#login{position:absolute;inset:0;z-index:10;background:var(--bg);overflow-y:auto;padding:30px 20px 24px}
+#login .logo{width:56px;height:56px;border-radius:17px;background:var(--ac);color:var(--onac);display:grid;place-items:center;margin-bottom:14px}
+#login .logo svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#login h1{font-size:28px;line-height:1.1;margin:0 0 6px;letter-spacing:-.02em}
+.rc[aria-pressed="true"]{border-color:var(--ac);background:var(--acs)}
+#toast{z-index:20}
+.bell{position:relative;width:34px;height:34px;border-radius:50%;border:0;background:var(--acs);color:var(--ac);cursor:pointer;display:grid;place-items:center}.bell svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.bell i{position:absolute;top:-3px;right:-3px;min-width:16px;height:16px;border-radius:8px;background:var(--r);color:#fff;font-size:10px;font-weight:700;line-height:16px;font-style:normal;text-align:center}
+input[type=file]{width:100%;font:inherit;color:var(--mut)}textarea{font:inherit}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+/* SKIN: stile del sito */
+:root{--bg:#F4F2FF;--card:#fff;--ink:#12143A;--mut:#585D94;--line:#DAD7F4;--vio:#7C5CFF;--tx:#6B4DE0}
+:root[data-theme="dark"]{--bg:#090A1E;--card:#14173D;--ink:#F4F3FF;--mut:#A7ABD8;--line:#2A2F66;--tx:#C2B3FF}
+#app{background:var(--bg);overflow:hidden}
+#app::before,#app::after{content:"";position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;aspect-ratio:1}
+#app::before{width:70%;right:-30%;top:-12%;background:var(--vio);opacity:.28}#app::after{width:60%;left:-28%;bottom:8%;background:#FF5FA2;opacity:.18}
+header,main,nav{position:relative;z-index:1}
+header h1{font-size:26px;font-weight:800;letter-spacing:-.04em}
+h2{font-size:21px;font-weight:800;letter-spacing:-.03em;margin:26px 0 10px}
+.card,.link{border-radius:24px}
+.btn{border-radius:999px;font-weight:800;padding:14px 20px}.btn.sec{background:var(--card);color:var(--ink);border:2px solid var(--line)}
+.chip{border-width:1.5px;padding:7px 14px}
+.hero{border-radius:30px;padding:22px}.hero .big{font-size:42px;letter-spacing:-.045em}
+.it{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;color:var(--tx)}.hero .it{color:inherit}
+.ic{border-radius:14px;color:var(--tx)}.back,.bell{color:var(--tx)}
+.badge{border-radius:999px;padding:3px 10px}.b-a{color:var(--tx)}
+nav{margin:0 12px 10px;border:1px solid var(--line);border-radius:999px;padding:6px}
+nav button[aria-current="page"]{background:var(--ac);color:var(--onac)}
+.seg,.seg button{border-radius:999px}.seg button{color:var(--tx)}
+.prog{background:var(--line)}.prog i,.bars div.hi{background:var(--tx)}
+</style>
+</head>
+<body>
+<div id="app">
+<header><button class="back" id="back" aria-label="Indietro" hidden>‹</button><h1 id="title">Oggi</h1><button class="bell" id="bell" data-go="notif" aria-label="Notifiche"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg><i id="bdot" hidden>0</i></button><button class="av" data-go="profilo" aria-label="Apri profilo">SM</button></header>
+<main id="main">
+
+<section class="scr" id="oggi">
+  <div class="hero">
+    <div class="mut">Prima lezione alle 8:00</div>
+    <div class="big">Esci di casa alle <span class="it">7:12</span></div>
+    <div class="mut">Linea 32 · fermata Piazza Mazzini · arriva tra 4 min</div>
+  </div>
+  <button class="link" data-go="mind"><span class="ic" data-i="heart"></span><span class="sp"><b>MindCheck</b><br><span class="mut">Settimana con 3 verifiche: carico alto</span></span><span class="badge b-y">Giallo</span></button>
+  <button class="link" data-go="studio"><span class="ic" data-i="book"></span><span class="sp"><b>Oggi da fare</b><br><span class="mut" id="homeTasks"></span></span></button>
+  <button class="link" data-go="capsula"><span class="ic" data-i="clock"></span><span class="sp"><b>Per il tragitto</b><br><span class="mut">Playlist Storia: 28 min, come il viaggio</span></span></button>
+  <h2>Collegamenti tra moduli</h2>
+  <p class="mut">L'organizzatore passa le verifiche a MindCheck, il modulo Autobus usa l'orario della prima lezione e la Capsula suggerisce i riassunti delle materie in arrivo.</p>
+</section>
+
+<section class="scr" id="studio" hidden>
+  <div class="days" id="days"></div>
+  <div class="card"><div id="taskList"></div></div>
+  <button class="btn sec" id="genPlan" style="margin-bottom:10px">Genera piano di studio della settimana</button>
+  <div class="card" id="plan" hidden></div>
+  <div class="card">
+    <b>Aggiungi impegno</b>
+    <div class="fld"><input type="text" id="newT" placeholder="Es. Verifica di matematica" aria-label="Titolo impegno"></div>
+    <div class="fld"><select id="newType" aria-label="Tipo"><option>Verifica</option><option>Compito</option><option>Sport</option><option>Lavoro</option></select><select id="newDay" aria-label="Giorno"></select></div>
+    <div class="fld"><select id="newSub" aria-label="Materia"><option>Matematica</option><option>Italiano</option><option>Storia</option><option>Inglese</option><option>Informatica</option><option>Altro (sport, lavoro)</option></select></div>
+    <div class="fld"><button class="btn" id="addT">Aggiungi al calendario</button></div>
+  </div>
+  <p class="mut">Il carico di verifiche e compiti viene condiviso con MindCheck solo se hai dato il consenso.</p>
+</section>
+
+<section class="scr" id="mind" hidden>
+  
+  <div id="vS">
+    <div class="card" id="qz"><b>Questionario settimanale · 2 minuti</b><p class="mut" style="margin-top:6px">10 domande su sonno, umore, stanchezza, motivazione e carico di studio. Non ci sono risposte giuste o sbagliate: scegli quella più vicina a come ti sei sentito questa settimana.</p><button class="btn" id="qStart">Inizia</button></div>
+    <div class="card" id="res" hidden>
+      <div class="light"><div class="lamp" id="lamp"></div><div><b id="rTitle"></b><div class="mut" id="rWhy"></div></div></div>
+      <div id="rTips" style="margin-top:10px"></div>
+    </div>
+    <div class="card"><b>Andamento</b><div class="bars" id="trend"></div><div style="height:16px"></div></div>
+    <div class="card"><b>Sportello d'ascolto</b><div class="mut">Parla con una persona di fiducia. Il colloquio è riservato.</div><div class="chips" id="slots" style="margin:8px 0"><button class="chip" aria-pressed="false">Mar 10:30</button><button class="chip" aria-pressed="false">Gio 11:30</button><button class="chip" aria-pressed="false">Ven 9:30</button></div><button class="btn sec" id="book">Prenota colloquio</button></div>
+    <p class="mut">Dati visibili solo a te e cancellabili. Non è uno strumento medico.</p>
+    <button class="btn sec" id="del">Cancella i miei dati</button>
+  </div>
+</section>
+
+<section class="scr" id="bus" hidden>
+  <div class="card">
+    <div class="row"><b class="sp">Casa → Scuola</b><span class="badge b-a">Preferito</span></div>
+    <div class="map" style="margin:10px 0;position:relative"><svg id="busSvg" viewBox="0 0 400 300" role="img" aria-label="Mappa del percorso dell'autobus" style="touch-action:none;cursor:grab"></svg><div class="zoom"><button data-z="1" aria-label="Ingrandisci">+</button><button data-z="-1" aria-label="Riduci">−</button><button data-z="0" aria-label="Ricentra">⌖</button></div></div>
+    <div class="row"><div class="sp"><b style="font-size:26px" id="eta">4 min</b><div class="mut" id="etaTxt">Linea 32 · fermata Piazza Mazzini</div></div><span class="badge b-y" id="crowd">Affollamento medio</span></div>
+    <div class="fld"><button class="btn sec" id="delay">Simula ritardo</button></div>
+  </div>
+  <div class="card" id="alert" hidden><b>Corsa in ritardo di 9 minuti</b><p class="mut">Percorso aggiornato: linea 14 dalla fermata Corso Italia (3 min a piedi), esci 6 minuti prima.</p></div>
+  <div class="card"><b>Ascolta durante il viaggio</b><div class="mut">Durata stimata 28 min · Storia, riassunti della 5EI</div><div class="fld"><button class="btn sec" data-go="capsula">Apri playlist</button></div></div>
+  <div class="card"><b>Com'è l'autobus?</b><div class="mut">La tua segnalazione aiuta i compagni.</div><div class="chips" id="crowdRep" style="margin:8px 0 0"><button class="chip" data-c="Vuoto">Vuoto</button><button class="chip" data-c="Medio">Medio</button><button class="chip" data-c="Pieno">Pieno</button></div></div>
+  <div class="card"><b>Cerca un altro tragitto</b><div class="fld"><select id="bFrom" aria-label="Partenza"><option>Casa</option><option>Scuola</option><option>Biblioteca</option><option>Stazione</option></select><select id="bTo" aria-label="Arrivo"><option>Scuola</option><option>Biblioteca</option><option>Stazione</option><option>Casa</option></select></div><div class="fld"><button class="btn sec" id="bGo">Cerca</button></div><div id="bRes"></div></div>
+  <h2>Tragitti salvati</h2>
+  <div class="card"><div class="row"><span class="sp">Casa → Scuola</span><span class="mut">28 min</span></div></div>
+  <div class="card"><div class="row"><span class="sp">Scuola → Biblioteca</span><span class="mut">12 min</span></div></div>
+</section>
+
+<section class="scr" id="altro" hidden>
+  <button class="link" data-r="stu" data-go="fianco"><span class="ic" data-i="hand"></span><span class="sp"><b>Al Tuo Fianco</b><br><span class="mut">Supporto tra pari e inclusione</span></span></button>
+  <button class="link" data-r="stu vol doc" data-go="mappa"><span class="ic" data-i="pin"></span><span class="sp"><b>Posti sicuri</b><br><span class="mut">Dove studiare in tranquillità</span></span></button>
+  <button class="link" data-r="stu" data-go="capsula"><span class="ic" data-i="clock"></span><span class="sp"><b>Capsula del Tempo</b><br><span class="mut">Consigli e audio degli studenti dell'ultimo anno</span></span></button>
+  <button class="link" data-go="profilo"><span class="ic" data-i="user"></span><span class="sp"><b>Profilo e impostazioni</b><br><span class="mut">Tema, consensi, notifiche</span></span></button>
+</section>
+
+<section class="scr" id="profilo" hidden>
+  <div class="card row"><div class="av big" aria-hidden="true">SM</div><div class="sp"><b id="pName">Samuele Manno</b><div class="mut" id="roleTxt">5EI · Studente</div></div></div>
+  <h2>Tema dell'app</h2>
+  <div class="card"><div class="mut" style="margin-bottom:6px">Aspetto</div>
+    <div class="seg" id="mode"><button data-m="auto">Auto</button><button data-m="light">Chiaro</button><button data-m="dark">Scuro</button></div>
+    <div class="mut">Colore principale</div><div class="sw" id="sw"></div></div>
+  <button class="btn sec" id="logout" style="margin-top:12px">Esci e cambia ruolo</button>
+  <h2 data-r="stu">Condivisione dati tra moduli</h2>
+  <div class="card" data-r="stu">
+    <label class="tg"><input type="checkbox" checked><span class="sp">Organizzatore → MindCheck<br><span class="mut">Carico di verifiche e compiti</span></span></label>
+    <label class="tg"><input type="checkbox" checked><span class="sp">Organizzatore → Autobus<br><span class="mut">Orario della prima lezione</span></span></label>
+    <label class="tg"><input type="checkbox"><span class="sp">MindCheck → Al Tuo Fianco<br><span class="mut">Segnale di sovraccarico</span></span></label></div>
+  <h2>Notifiche</h2>
+  <div class="card">
+    <label class="tg"><input type="checkbox" checked><span class="sp">Avviso su quando uscire di casa</span></label>
+    <label class="tg"><input type="checkbox" checked><span class="sp">Ritardi e corse soppresse</span></label>
+    <label class="tg"><input type="checkbox" checked><span class="sp">Promemoria questionario settimanale</span></label></div>
+  <button class="btn sec" id="exp">Scarica i miei dati</button>
+  <div class="fld"><button class="btn sec" id="wipe">Elimina i miei dati</button></div>
+</section>
+
+<section class="scr" id="notif" hidden><div id="nlist"></div></section>
+
+<section class="scr" id="vol" hidden>
+  <div class="hero"><div class="mut">Prossimo impegno</div><div class="big">Oggi alle 10:00</div><div class="mut">Accompagnamento in palestra con un compagno della 2A</div></div>
+  <h2>Richieste in arrivo</h2>
+  <div id="reqs"></div>
+  <p class="mut">Vedi solo i dati necessari: nome, classe, tipo di aiuto e orario.</p>
+  <h2>Le mie ore</h2>
+  <div class="card"><div class="row"><b class="sp"><span id="hrs">14</span> su 20 ore certificate</b><span class="mut">PCTO</span></div><div class="prog"><i id="hbar" style="width:70%"></i></div><div class="mut">In attesa di certificazione: <span id="hpend">3</span> ore</div></div>
+  <h2>Disponibilità settimanale</h2>
+  <div class="chips" id="avail"><button class="chip" aria-pressed="true">Lun</button><button class="chip" aria-pressed="true">Mar</button><button class="chip" aria-pressed="false">Mer</button><button class="chip" aria-pressed="true">Gio</button><button class="chip" aria-pressed="false">Ven</button></div>
+</section>
+
+<section class="scr" id="sta" hidden>
+  <div class="card row"><div class="sp"><b style="font-size:26px" id="sOpen">3</b><div class="mut">richieste da assegnare</div></div><div class="sp"><b style="font-size:26px">12</b><div class="mut">volontari attivi</div></div></div>
+  <h2>Richieste da coordinare</h2>
+  <div id="sreqs"></div>
+  <h2>Ore da certificare</h2>
+  <div class="card" id="cert"></div>
+  <h2>Gite e uscite</h2>
+  <div class="card"><div class="row"><div class="sp"><b>Gita a Matera</b><div class="mut">Ven 6 nov · 4 buddy assegnati su 5</div></div><button class="chip" id="gita">Assegna buddy</button></div></div>
+</section>
+
+<section class="scr" id="doc" hidden>
+  <div class="chips" id="cls"><button class="chip" data-cl="5EI" aria-pressed="true">5EI</button><button class="chip" data-cl="4AI" aria-pressed="false">4AI</button><button class="chip" data-cl="3BI" aria-pressed="false">3BI</button></div>
+  <div class="card"><b>Stress medio della classe</b><div class="mut" id="clsN"></div>
+    <div id="clsStress"><div class="bars" id="clsBars"></div><div style="height:16px"></div></div>
+    <p class="mut" id="clsHide" hidden>Dati nascosti: i partecipanti sono troppo pochi per garantire l'anonimato.</p></div>
+  <div class="card"><b>Verifiche in classe per settimana</b><div class="bars" id="clsLoad"></div><div style="height:16px"></div></div>
+  <p class="mut">Ai docenti arrivano solo dati aggregati e anonimi, mai individuali.</p>
+  <h2>Contenuti da moderare</h2>
+  <div class="card" id="mod"></div>
+  <h2>Riassunti audio da verificare</h2>
+  <div class="card" id="ver"></div>
+</section>
+
+<section class="scr" id="fianco" hidden>
+  <div class="card"><b>Di che aiuto hai bisogno?</b>
+    <div class="chips" style="margin-top:10px" id="sup"></div>
+    <div class="fld"><select id="rDay" aria-label="Giorno"><option>Oggi</option><option>Domani</option><option>Ven 6 nov (gita)</option></select><input type="text" id="rTime" placeholder="Ora, es. 10:00" aria-label="Ora"></div>
+    <div class="fld"><input type="text" id="rWhere" placeholder="Da dove a dove? Es. Aula 12 → Palestra" aria-label="Luogo"></div>
+    <div class="mut" style="margin-top:8px">Chi preferisci?</div>
+    <div class="chips" id="rWho"><button class="chip" aria-pressed="true">Indifferente</button><button class="chip" aria-pressed="false">Buddy</button><button class="chip" aria-pressed="false">Operatore</button></div>
+    <div class="fld"><input type="text" id="rNote" placeholder="Note per chi ti aiuta (facoltativo)" aria-label="Note"></div>
+    <label class="tg"><input type="checkbox" id="rRep"><span class="sp">Ripeti ogni settimana</span></label>
+    <button class="btn" id="req">Richiedi supporto</button></div>
+  <h2>Le mie richieste</h2><div id="mine"></div>
+  <h2>Calendario condiviso</h2>
+  <div class="card"><div class="row"><div class="sp"><b>Gita a Matera</b><div class="mut">Ven 6 nov · 4 buddy assegnati</div></div><span class="badge b-g">Confermata</span></div></div>
+  <div class="card"><div class="row"><div class="sp"><b>Promemoria</b><div class="mut">Porta il libro di Italiano e il tablet</div></div></div></div>
+  <h2>Ore da volontario</h2>
+  <div class="card"><div class="row"><b class="sp">14 su 20 ore certificate</b><span class="mut">PCTO</span></div><div class="prog"><i style="width:70%"></i></div></div>
+</section>
+
+<section class="scr" id="mappa" hidden>
+  <div class="chips" id="flt"></div>
+  <div class="map"><svg viewBox="0 0 400 300" role="img" aria-label="Mappa dei posti sicuri" id="mapSvg"></svg></div>
+  <div id="place"></div>
+  <div class="card" data-r="stu vol"><b>Segnala un nuovo luogo</b>
+    <div class="fld"><input type="text" id="plN" placeholder="Nome del posto" aria-label="Nome"></div>
+    <div class="fld"><input type="text" id="plA" placeholder="Indirizzo" aria-label="Indirizzo"></div>
+    <div class="chips" id="plF" style="margin-top:8px"><button class="chip" aria-pressed="false">Wifi</button><button class="chip" aria-pressed="false">Gratis</button><button class="chip" aria-pressed="false">Aperto 24h</button></div>
+    <button class="btn sec" id="plGo">Invia alla moderazione</button></div>
+</section>
+
+<section class="scr" id="capsula" hidden>
+  <div class="chips" id="cats"></div>
+  <div class="card" data-r="stu vol"><b>Contribuisci alla Capsula</b>
+    <div class="chips" id="upT" style="margin-top:8px"><button class="chip" data-t="msg" aria-pressed="true">Consiglio</button><button class="chip" data-t="aud" aria-pressed="false">Riassunto audio</button><button class="chip" data-t="note" aria-pressed="false">Appunti</button></div>
+    <div class="fld"><input type="text" id="upTitle" placeholder="Titolo" aria-label="Titolo"></div>
+    <div class="fld"><select id="upSub" aria-label="Materia o categoria"><option>Metodo di studio</option><option>Matematica</option><option>Italiano</option><option>Storia</option><option>Inglese</option><option>Informatica</option><option>Vita di classe</option></select></div>
+    <div class="fld" id="upTxtW"><textarea id="upTxt" rows="3" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)" placeholder="Scrivi il tuo consiglio per chi inizia" aria-label="Testo"></textarea></div>
+    <div class="fld" id="upFileW" hidden><input type="file" id="upf" accept="audio/*,.pdf,.doc,.docx,.ppt,.pptx,image/*" aria-label="File da caricare"></div>
+    <div class="mut" style="margin-top:8px">Quando sbloccare</div>
+    <div class="fld"><select id="upUnl" aria-label="Sblocco"><option>Subito dopo l'approvazione</option><option>14 settembre 2027 (inizio anno)</option></select></div>
+    <label class="tg"><input type="checkbox" id="upC"><span class="sp">Il contenuto è mio: niente libri o materiali protetti da copyright, niente dati personali.</span></label>
+    <button class="btn" id="upGo">Invia alla moderazione</button>
+    <div class="mut" style="margin-top:6px">Resta anonimo. Viene pubblicato dopo il controllo di un docente. Audio e appunti sono materiale non ufficiale.</div></div>
+  <div id="myUp" data-r="stu vol"></div>
+  <div id="msgs"></div>
+  <h2>Riassunti audio</h2>
+  <div class="card" id="aud"></div>
+  <h2>Dalla community</h2><div class="card" id="appr"></div>
+  <p class="mut">Materiale non ufficiale prodotto dagli studenti. Tutti i contenuti sono moderati prima della pubblicazione.</p>
+</section>
+</main>
+<div id="login" role="dialog" aria-label="Accesso">
+  <div class="logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19V5"/></svg></div>
+  <h1>App Tutor <span class="it">Studenti</span></h1>
+  <p class="mut">Studio, benessere, inclusione e trasporti in un'unica app.</p>
+  <h2>Chi sei?</h2>
+  <div id="roles"></div>
+  <h2>Nome e cognome</h2>
+  <input type="text" id="uname" placeholder="Scegli prima un ruolo" aria-label="Nome e cognome">
+  <h2>Accesso</h2>
+  <div class="chips"><button class="chip" id="mIn" aria-pressed="true">Ho un account</button><button class="chip" id="mReg" aria-pressed="false">Registrati</button></div>
+  <div class="fld"><input type="text" id="mail" placeholder="Email scolastica" aria-label="Email" autocomplete="off"></div>
+  <div class="fld"><input type="password" id="pwd" placeholder="Password (min. 8 caratteri)" aria-label="Password" autocomplete="off"></div>
+  <div id="regOnly" hidden><div class="mut" style="margin-top:8px">Data di nascita</div><div class="fld"><input type="date" id="dob" aria-label="Data di nascita"></div>
+    <div id="parent" hidden><div class="fld"><input type="text" id="pmail" placeholder="Email di un genitore per il consenso" aria-label="Email genitore"></div><div class="mut" style="margin-top:4px">Sei minorenne: serve il consenso di un genitore (GDPR).</div></div></div>
+  <label class="tg"><input type="checkbox" id="priv"><span class="sp">Ho letto l'informativa privacy (GDPR). Per i minorenni serve il consenso dei genitori.</span></label>
+  <button class="btn" id="enter" disabled>Accedi</button>
+  <p class="mut" style="margin-top:10px">Mockup: nessuna password. Ogni ruolo vede solo le funzioni e i dati che gli spettano.</p>
+</div>
+<div id="toast" role="status"></div>
+<nav id="nav"></nav>
+</div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const I={chart:'<path d="M5 20V11M12 20V4M19 20v-6"/>',users:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0M16 4.5a3.5 3.5 0 0 1 0 7M22 20a7 7 0 0 0-4-6"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',book:'<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19V5"/>',heart:'<path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.5A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/>',bus:'<rect x="4" y="3" width="16" height="14" rx="3"/><path d="M4 11h16M7 21v-4M17 21v-4"/>',home:'<path d="M3 11l9-8 9 8M5 10v10h14V10"/>',more:'<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',hand:'<path d="M8 12V5a1.5 1.5 0 0 1 3 0v6m0-1V3.5a1.5 1.5 0 0 1 3 0V11m0-4a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-3l-2-4a1.5 1.5 0 0 1 2.5-1.5L8 15"/>',pin:'<path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'};
+const ico=n=>`<svg viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
+$$('[data-i]').forEach(e=>e.innerHTML=ico(e.dataset.i));
+const T={oggi:'Oggi',studio:'Studio',mind:'MindCheck',bus:'Autobus',altro:'Altro',fianco:'Al Tuo Fianco',mappa:'Posti sicuri',capsula:'Capsula del Tempo',profilo:'Profilo',vol:'Richieste',sta:'Coordina',doc:'Classe',notif:'Notifiche'};
+const PAR={fianco:'altro',mappa:'altro',capsula:'altro',profilo:'altro',notif:'altro'};
+const ROLE={
+ stu:{n:'Studente',i:'book',u:'Samuele Manno',d:`Organizza lo studio, controlla il tuo benessere e prendi l'autobus.`,tabs:[['oggi','home'],['studio','book'],['mind','heart'],['bus','bus'],['altro','more']]},
+ vol:{n:'Volontario buddy',i:'hand',u:'Benedetta Rucco',d:`Accompagna i compagni e raccogli ore certificate per i PCTO.`,tabs:[['vol','hand'],['bus','bus'],['capsula','clock'],['altro','more']]},
+ sta:{n:'Personale scolastico',i:'users',u:'Prof.ssa Neri',d:`Docenti di sostegno, collaboratori ed educatori: coordinano il buddy system.`,tabs:[['sta','users'],['mappa','pin'],['altro','more']]},
+ doc:{n:'Docente',i:'chart',u:'Prof. Bianchi',d:`Quadro anonimo del carico della classe e verifica dei riassunti audio.`,tabs:[['doc','chart'],['capsula','clock'],['altro','more']]}};
+let role='stu',uname='Samuele Manno';
+const par=id=>ROLE[role].tabs.some(t=>t[0]===id)?null:PAR[id];
+let hist=['oggi'];
+function go(id,back){if(!back)hist.push(id);$$('.scr').forEach(s=>s.hidden=s.id!==id);$('#title').textContent=T[id];$('#back').hidden=!par(id);
+ const p=par(id)||id;$$('#nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.go===p?'page':'false'));$('#main').scrollTop=0}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g)go(g.dataset.go)});
+$('#back').onclick=()=>go(par(hist[hist.length-1])||ROLE[role].tabs[0][0]);
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2200)}
+
+/* STUDIO */
+const D=['Lun','Mar','Mer','Gio','Ven','Sab','Dom'];let sel=2;
+let tasks=[{t:'Verifica di Matematica',k:'Verifica',d:3,x:0},{t:'Esercizi di Inglese',k:'Compito',d:2,x:0},{t:'Allenamento calcetto',k:'Sport',d:2,x:0},{t:'Verifica di Storia',k:'Verifica',d:4,x:0},{t:'Orale di Informatica',k:'Verifica',d:0,x:0}];
+function renderStudio(){
+ $('#days').innerHTML=D.map((n,i)=>{const c=tasks.filter(t=>t.d===i&&t.k==='Verifica').length;return`<button class="day" data-d="${i}" aria-pressed="${i===sel}">${n}<b>${12+i}</b><div class="dots">${'<i></i>'.repeat(c)}</div></button>`}).join('');
+ const l=tasks.map((t,i)=>({...t,i})).filter(t=>t.d===sel);
+ $('#taskList').innerHTML=l.length?l.map(t=>`<label class="task ${t.x?'done':''}"><input type="checkbox" data-i="${t.i}" ${t.x?'checked':''}><span class="sp">${t.t}${t.m?`<br><span class="mut">${t.m}</span>`:''}</span><span class="badge ${t.k==='Verifica'?'b-y':'b-a'}">${t.k}</span></label>`).join(''):'<p class="mut">Nessun impegno. Aggiungi compiti o verifiche qui sotto.</p>';
+ $('#homeTasks').textContent=tasks.filter(t=>t.d===2&&!t.x).map(t=>t.t).join(' · ')||'Tutto fatto per oggi';
+}
+$('#newDay').innerHTML=D.map((n,i)=>`<option value="${i}">${n} ${12+i}</option>`).join('');
+$('#days').onclick=e=>{const b=e.target.closest('.day');if(b){sel=+b.dataset.d;renderStudio()}};
+$('#taskList').onchange=e=>{tasks[+e.target.dataset.i].x=e.target.checked?1:0;renderStudio()};
+$('#addT').onclick=()=>{const v=$('#newT').value.trim();if(!v)return toast('Scrivi il titolo dell\'impegno');tasks.push({t:v,k:$('#newType').value,d:+$('#newDay').value,x:0,m:$('#newSub').value});$('#newT').value='';sel=+$('#newDay').value;renderStudio();toast('Impegno aggiunto al calendario')};
+renderStudio();
+
+let lastRisk='g';
+$('#genPlan').onclick=()=>{const L=lastRisk==='r'?25:lastRisk==='y'?35:45,out=[];
+ tasks.filter(t=>t.k==='Verifica'&&!t.x).forEach(t=>[2,1].forEach(o=>{const d=t.d-o;if(d>=0)out.push([d,'Ripasso: '+t.t.replace(/^(Verifica|Orale) di /,''),L])}));
+ out.sort((a,b)=>a[0]-b[0]);$('#plan').hidden=false;
+ $('#plan').innerHTML=`<b>Piano della settimana</b><div class="mut">${lastRisk==='g'?'Ritmo normale':'Piano alleggerito in base al tuo ultimo check-in'}</div>`+(out.length?out.map(o=>`<div class="pl"><b style="width:44px">${D[o[0]]}</b><span class="sp">${o[1]}</span><span class="mut">${o[2]} min</span></div>`).join(''):'<p class="mut">Nessuna verifica da preparare.</p>');toast('Piano generato')};
+/* MINDCHECK */
+let hist6=[2.1,2.6,1.8,3.0,2.4];
+function bars(el,v,max,last){$(el).innerHTML=v.map((x,i)=>`<div class="${i===last?'hi':''}" style="height:${x/max*100}%"><small>${i===last?'Ora':'S'+(i+1)}</small></div>`).join('')}
+function drawTrend(){bars('#trend',hist6,4.5,hist6.length-1)}drawTrend();
+const QZ=[
+['Sonno','Nell\'ultima settimana, quante notti hai dormito almeno 7 ore?',['Quasi tutte','4–5 notti','2–3 notti','Quasi mai']],
+['Sonno','Come ti senti al risveglio?',['Riposato','Un po\' stanco','Molto stanco','Esausto già dal mattino']],
+['Umore','Quanto spesso ti sei sentito giù o irritabile?',['Mai','Qualche giorno','Più di metà dei giorni','Quasi ogni giorno']],
+['Umore','Hai ancora voglia di vedere gli amici o fare le attività che ti piacciono?',['Sì, come sempre','Un po\' meno','Raramente','Non ne ho più voglia']],
+['Stanchezza','A fine giornata, quanta energia ti resta?',['Ne ho ancora','Abbastanza','Poca','Nessuna']],
+['Stanchezza','Hai mal di testa, tensione o mal di stomaco legati allo studio?',['Mai','Ogni tanto','Spesso','Quasi ogni giorno']],
+['Motivazione','Riesci a concentrarti quando studi?',['Molto bene','Abbastanza','Faccio fatica','Non ci riesco']],
+['Motivazione','Ti capita di pensare “tanto non serve a niente”?',['Mai','Raramente','Spesso','Quasi sempre']],
+['Carico','Quante ore studi ogni giorno oltre alle lezioni?',['Meno di 2','2–3','4–5','Più di 5']],
+['Carico','Riesci a prenderti tempo libero senza sentirti in colpa?',['Sì','A volte','Raramente','No, mai']]];
+let qi=0,ans=[];const QS=$('#qz').innerHTML;
+function qView(){const q=QZ[qi];$('#qz').innerHTML=`<div class="row mut"><span class="sp">${q[0]}</span><span>${qi+1} di ${QZ.length}</span></div><div class="prog"><i style="width:${(qi+1)/QZ.length*100}%"></i></div><p style="margin:12px 0;font-weight:600;font-size:16px">${q[1]}</p>`+q[2].map((o,i)=>`<button class="opt" data-o="${i}" aria-pressed="${ans[qi]===i}">${o}</button>`).join('')+`<div class="row"><button class="btn sec" id="qPrev" ${qi?'':'disabled'}>Indietro</button><button class="btn" id="qNext" ${ans[qi]===undefined?'disabled':''}>${qi===QZ.length-1?'Vedi risultato':'Avanti'}</button></div>`}
+$('#qz').onclick=e=>{const t=e.target;if(t.id==='qStart'){qi=0;ans=[];qView()}else if(t.dataset.o!==undefined){ans[qi]=+t.dataset.o;qView()}else if(t.id==='qPrev'){qi--;qView()}else if(t.id==='qNext'){if(qi<QZ.length-1){qi++;qView()}else qDone()}};
+function qDone(){const ar={};QZ.forEach((q,i)=>ar[q[0]]=(ar[q[0]]||0)+ans[i]);const ver=tasks.filter(t=>t.k==='Verifica').length,tot=ans.reduce((a,b)=>a+b)+Math.min(3,ver*.5);
+ const lv=tot<10?['g','Verde','Stai gestendo bene la settimana']:tot<18?['y','Giallo','Attenzione: il carico sta crescendo']:['r','Rosso','Rischio alto di sovraccarico'];
+ const worst=Object.entries(ar).sort((a,b)=>b[1]-a[1])[0][0];
+ $('#res').hidden=false;$('#lamp').style.background=`var(--${lv[0]})`;$('#rTitle').textContent=`${lv[1]} · ${lv[2]}`;
+ $('#rWhy').textContent=`Perché: l'area più pesante è «${worst}» e hai ${ver} verifiche in arrivo dall'organizzatore.`;
+ let h=Object.entries(ar).map(([k,v])=>`<div class="row" style="margin:6px 0"><span style="width:96px">${k}</span><div class="prog sp"><i style="width:${Math.max(6,v/6*100)}%;background:var(--${v<=2?'g':v<=4?'y':'r'})"></i></div></div>`).join('');
+ h+='<span class="badge b-a">Suggerimento</span> '+(lv[0]==='g'?'Mantieni le pause e il sonno regolare.':'Prova ripassi da 25 minuti e vai a dormire prima.');
+ if(lv[0]!=='g')h+='<div class="fld"><button class="btn sec" data-go="studio">Alleggerisci il piano</button></div>';
+ if(lv[0]==='r')h+='<div class="fld"><button class="btn sec" data-go="capsula">Leggi i consigli dei più grandi</button></div><p class="mut" style="margin-top:8px">Se ti senti sopraffatto, parlane con una persona di fiducia o con lo sportello d\'ascolto.</p>';
+ lastRisk=lv[0];$('#rTips').innerHTML=h;hist6=[...hist6.slice(-5),+(tot/33*4.5).toFixed(1)];drawTrend();
+ $('#qz').innerHTML='<b>Questionario completato</b><p class="mut" style="margin:6px 0">Rifallo la prossima settimana per vedere come cambia l\'andamento.</p><button class="btn" id="qStart">Rifai il questionario</button>';$('#res').scrollIntoView({behavior:'smooth'})}
+$('#del').onclick=()=>{hist6=[];$('#trend').innerHTML='<p class="mut">Nessun dato salvato</p>';$('#res').hidden=true;toast('Dati cancellati')};
+
+
+/* BUS */
+const CITY=`<rect x="-50" y="-50" width="500" height="400" fill="var(--land)"/><path d="M-50 215C60 190 140 255 230 232S360 200 450 215V262C360 245 300 275 230 280S60 245 -50 262Z" fill="var(--water)"/><rect x="30" y="35" width="85" height="55" rx="10" fill="var(--park)"/><rect x="285" y="168" width="65" height="42" rx="10" fill="var(--park)"/><g stroke="var(--road)" fill="none" stroke-linecap="round"><path d="M-50 95H450M-50 145H450M60 -50V215M190 -50V215M330 -50V215" stroke-width="3"/><path d="M-50 120H450M-50 70H450M120 -50V215M260 -50V215M-50 170H450" stroke-width="8"/></g><g font-size="7" fill="var(--mut)"><text x="12" y="116">Via Roma</text><text x="272" y="66">Viale Stazione</text><text x="42" y="66">Villa Comunale</text><text x="8" y="166">Corso Italia</text><text x="250" y="262" font-style="italic">Fiume Idro</text></g>`;
+const RT='M0 120H120V70H260V120H335',ALT='M120 120V170H260V120H335',STOP=240,sv=$('#busSvg');
+let late=false,prog=0,lastEta=0,vb={x:0,y:0,w:400,h:300},drag=null;
+const stops=[[190,70,'Piazza Mazzini'],[260,95,'Stazione'],[335,120,'Scuola'],[120,145,'Corso Italia']];
+const setVB=()=>sv.setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+sv.innerHTML=CITY+`<path id="alt" d="${ALT}" fill="none" stroke="var(--y)" stroke-width="4" stroke-dasharray="6 4" style="display:none"/><path id="rt" d="${RT}" fill="none" stroke="var(--tx)" stroke-width="5" stroke-linejoin="round"/><path d="M205 40L190 70" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="3 3"/>`+stops.map(s=>`<circle cx="${s[0]}" cy="${s[1]}" r="5" fill="var(--card)" stroke="var(--ink)" stroke-width="2"/><text x="${s[0]+8}" y="${s[1]+3}" font-size="8" font-weight="600" fill="var(--ink)">${s[2]}</text>`).join('')+`<circle cx="205" cy="38" r="7" fill="var(--tx)"/><text x="215" y="36" font-size="8" font-weight="600" fill="var(--ink)">Casa</text><g id="busIcon"><rect x="-11" y="-7" width="22" height="14" rx="4" fill="var(--g)"/><text y="3" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">32</text></g>`;
+function tick(){if(!$('#bus').hidden){if(!late){prog+=.35;if(prog>=STOP)prog=0}const pt=$('#rt').getPointAtLength(prog);$('#busIcon').setAttribute('transform',`translate(${pt.x},${pt.y})`);const m=late?13:Math.max(1,Math.ceil((STOP-prog)/STOP*5));if(m!==lastEta){lastEta=m;$('#eta').textContent=m+' min'}}requestAnimationFrame(tick)}
+tick();
+$('#delay').onclick=()=>{late=!late;prog=late?100:0;$('#etaTxt').textContent=late?'Linea 32 in ritardo · alternativa linea 14':'Linea 32 · fermata Piazza Mazzini';$('#alert').hidden=!late;$('#alt').style.display=late?'':'none';$('#delay').textContent=late?'Ripristina orario':'Simula ritardo';const c=$('#crowd');c.textContent=late?'Affollamento pieno':'Affollamento medio';c.className='badge '+(late?'b-r':'b-y');if(late)toast('Percorso aggiornato per il ritardo')};
+sv.onpointerdown=e=>{drag={x:e.clientX,y:e.clientY};sv.setPointerCapture(e.pointerId)};
+sv.onpointermove=e=>{if(!drag)return;const k=vb.w/sv.clientWidth;vb.x=Math.max(0,Math.min(400-vb.w,vb.x-(e.clientX-drag.x)*k));vb.y=Math.max(0,Math.min(300-vb.h,vb.y-(e.clientY-drag.y)*k));drag={x:e.clientX,y:e.clientY};setVB()};
+sv.onpointerup=()=>drag=null;
+$('.zoom').onclick=e=>{const z=e.target.dataset.z;if(z===undefined)return;if(z==='0')vb={x:0,y:0,w:400,h:300};else{const w=Math.max(110,Math.min(400,vb.w*(z==='1'?.7:1/.7))),h=w*.75;vb={x:Math.max(0,Math.min(400-w,vb.x+(vb.w-w)/2)),y:Math.max(0,Math.min(300-h,vb.y+(vb.h-h)/2)),w,h}}setVB()};
+
+$('#crowdRep').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;const c=$('#crowd');c.textContent='Affollamento '+b.dataset.c.toLowerCase();c.className='badge '+({Vuoto:'b-g',Medio:'b-y',Pieno:'b-r'})[b.dataset.c];toast('Grazie! Segnalazione condivisa')};
+const BS=['Casa','Scuola','Biblioteca','Stazione'];
+$('#bGo').onclick=()=>{const a=$('#bFrom').value,b=$('#bTo').value;if(a===b)return toast('Scegli due fermate diverse');const n=Math.abs(BS.indexOf(a)-BS.indexOf(b));$('#bRes').innerHTML=`<div class="pl"><div class="sp"><b>${a} → ${b}</b><div class="mut">${n>1?'Linea 32 + cambio con linea 14':'Linea 32, senza cambi'} · ${10+n*7} min</div></div><button class="chip" id="bSave">★ Salva</button></div>`};
+$('#bRes').onclick=e=>{if(e.target.id==='bSave')toast('Tragitto salvato nei preferiti')};
+$('#slots').onclick=e=>{const b=e.target.closest('.chip');if(b)$$('#slots .chip').forEach(x=>x.setAttribute('aria-pressed',x===b))};
+$('#book').onclick=()=>{const s=$('#slots .chip[aria-pressed="true"]');if(!s)return toast('Scegli un orario');ntf('stu','Colloquio allo sportello prenotato: '+s.textContent);toast('Colloquio prenotato')};
+/* FIANCO */
+let sup='Cambio aula';
+$('#sup').innerHTML=['Cambio aula','Palestra','Laboratorio','Ingresso e uscita','Gita o uscita','Libri e materiali'].map(s=>`<button class="chip" aria-pressed="${s===sup}">${s}</button>`).join('');
+$('#sup').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;sup=b.textContent;$$('#sup .chip').forEach(x=>x.setAttribute('aria-pressed',x===b))};
+$('#req').onclick=()=>sendReq();
+
+/* MAPPA */
+const P=[{n:'Biblioteca Comunale',x:150,y:95,h:'Lun–Sab 8:30–21:00',w:1,f:1,a:0,r:4.8},{n:'Sala studio Parrocchia',x:290,y:95,h:'Tutti i giorni 15–22',w:1,f:1,a:0,r:4.3},{n:'Parco Villa Comunale',x:75,y:65,h:'Sempre aperto',w:0,f:1,a:1,r:4.0},{n:'Spazio giovani Ex-Mulino',x:330,y:185,h:'Lun–Ven 14–20',w:1,f:1,a:0,r:4.6}];
+let flt={Wifi:0,Gratis:0,'Aperto 24h':0},cur=0;
+$('#flt').innerHTML=Object.keys(flt).map(k=>`<button class="chip" aria-pressed="false">${k}</button>`).join('');
+$('#flt').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;flt[b.textContent]=!flt[b.textContent];b.setAttribute('aria-pressed',!!flt[b.textContent]);drawMap()};
+function ok(p){return(!flt.Wifi||p.w)&&(!flt.Gratis||p.f)&&(!flt['Aperto 24h']||p.a)}
+function drawMap(){const v=P.map((p,i)=>({...p,i})).filter(ok);
+ $('#mapSvg').innerHTML=CITY+'<g id="pins">'+v.map(p=>`<g class="pin" data-p="${p.i}" tabindex="0" role="button" aria-label="${p.n}"><circle cx="${p.x}" cy="${p.y}" r="${p.i===cur?15:11}" fill="${p.i===cur?'var(--tx)':'var(--ink)'}"/><circle cx="${p.x}" cy="${p.y}" r="4" fill="var(--card)"/></g>`).join('')+'</g>';
+ const p=P[cur];$('#place').innerHTML=ok(p)?`<div class="card"><div class="row"><b class="sp">${p.n}</b><span class="badge b-g">★ ${p.r}</span></div><div class="mut">${p.h}</div><div class="chips" style="margin:8px 0 0">${p.w?'<span class="badge b-a">Wifi</span>':''}${p.f?'<span class="badge b-a">Gratis</span>':''}${p.a?'<span class="badge b-a">Aperto 24h</span>':''}</div><div class="mut" style="margin-top:8px">La tua valutazione</div><div class="chips">${[1,2,3,4,5].map(n=>`<button class="chip" data-star="${n}">${n}★</button>`).join('')}</div></div>`:'<p class="mut">Nessun posto con questi filtri. Togline qualcuno.</p>';
+ const r=$('#rate');if(r)r.onclick=()=>toast('Valutazione inviata alla moderazione')}
+$('#mapSvg').onclick=e=>{const g=e.target.closest('.pin');if(g){cur=+g.dataset.p;drawMap()}};
+drawMap();
+
+/* CAPSULA */
+const C=['Metodo di studio','Materie','Vita di classe','Per i nuovi buddy'];let cat=0;
+const M=[['Non rimandare i riassunti: 20 minuti al giorno valgono più di una notte prima.',0],['In Informatica conta capire la logica, non imparare a memoria il codice.',0],['Fate gruppo il primo mese: vi salverà nei momenti difficili.',0],['Chiedere aiuto è normale. Il buddy ti spiega, non ti giudica.',0]];
+const A=[['Storia: la Guerra Fredda',9,'Prof. verificato'],['Matematica: derivate',12,'Non verificato'],['Italiano: Pirandello',7,'Prof. verificato']];let play=-1,fav={};
+$('#cats').innerHTML=C.map((c,i)=>`<button class="chip" data-c="${i}" aria-pressed="${i===0}">${c}</button>`).join('');
+$('#cats').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;cat=+b.dataset.c;$$('#cats .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));drawCap()};
+function drawCap(){
+ $('#msgs').innerHTML=`<div class="card"><div class="mut">Anonimo · 5EI 2026/27</div><p style="margin-top:4px">${M[cat][0]}</p><button class="chip" data-f="m${cat}">${fav['m'+cat]?'♥ Salvato':'♡ Salva'}</button></div><div class="card lock"><div class="row"><span class="ic" data-i="clock"></span><div><b>Altri 12 consigli chiusi</b><div class="mut">Si sbloccano il 14 settembre 2027</div></div></div></div>`;
+ $$('#msgs [data-i]').forEach(e=>e.innerHTML=ico(e.dataset.i));
+ $('#aud').innerHTML=A.map((a,i)=>`<div class="pl"><button class="play" data-a="${i}" aria-label="${play===i?'Pausa':'Riproduci'} ${a[0]}">${play===i?'❚❚':'▶'}</button><div class="sp"><b>${a[0]}</b><div class="mut">${a[1]} min</div></div><span class="badge ${a[2][0]==='P'?'b-g':'b-y'}">${a[2]}</span></div>`).join('')}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-a]'),f=e.target.closest('[data-f]');
+ if(a){play=play===+a.dataset.a?-1:+a.dataset.a;drawCap()}if(f){fav[f.dataset.f]=!fav[f.dataset.f];drawCap()}});
+drawCap();
+
+/* RUOLI E ACCESSO */
+let REQ=[{s:'Studente 2A',k:'Cambio aula',w:'Oggi 10:00',st:'new'},{s:'Studente 1C',k:'Palestra',w:'Oggi 11:00',st:'new'},{s:'Studente 3B',k:'Ingresso e uscita',w:'Domani 8:00',st:'new'}],hrs=14,pend=3;
+const VOL=['Giulia R.','Marco T.','Sara B.'],CERT=[{n:'Giulia R.',h:6},{n:'Marco T.',h:4},{n:'Sara B.',h:3}],VER=[{t:'Matematica: derivate',a:'5EI',v:0},{t:'Informatica: reti',a:'5EI',v:0},{t:'Storia: Guerra Fredda',a:'5EI',v:1}];
+const CL={'5EI':{n:14,s:[1.9,2.4,2.2,3.1,2.8],v:[1,3,2,4,3]},'4AI':{n:6,s:[2,2.1,2.5,2.2,2.6],v:[2,2,1,3,2]},'3BI':{n:21,s:[2,1.8,2.6,2.2,2.4],v:[2,1,3,2,3]}};
+const who=r=>`<div class="sp"><b>${r.k}</b><div class="mut">${r.s} · ${r.w}</div>${r.loc?`<div class="mut">${r.loc}${r.note?' · '+r.note:''}${r.pref&&r.pref!=='Indifferente'?' · '+r.pref:''}</div>`:''}</div>`;
+function drawRoles(){
+ const mine=REQ.map((r,i)=>({...r,i})).filter(r=>(r.st==='new'&&!r.skip)||r.by===uname);
+ $('#reqs').innerHTML=mine.length?mine.map(r=>`<div class="card"><div class="row">${who(r)}${r.st==='new'?`<button class="chip" data-acc="${r.i}">Accetta</button><button class="chip" data-no="${r.i}">Rifiuta</button>`:'<span class="badge b-g">Accettata</span>'}</div></div>`).join(''):'<p class="mut">Nessuna richiesta aperta. Ti avvisiamo quando ne arriva una nuova.</p>';
+ $('#hrs').textContent=hrs;$('#hbar').style.width=hrs/20*100+'%';$('#hpend').textContent=pend;
+ $('#sreqs').innerHTML=REQ.map((r,i)=>`<div class="card"><div class="row">${who(r)}${r.st==='new'?'<span class="badge b-y">Da assegnare</span>':`<span class="badge b-g">${r.st==='acc'?'Accettata':'Assegnata'}: ${r.by}</span>`}</div>${r.st==='new'?`<div class="fld"><select id="sel${i}" aria-label="Volontario">${VOL.map(v=>`<option>${v}</option>`).join('')}</select><button class="btn" style="width:auto" data-ass="${i}">Assegna</button></div>`:''}</div>`).join('');
+ $('#sOpen').textContent=REQ.filter(r=>r.st==='new').length;
+ $('#cert').innerHTML=CERT.length?CERT.map((c,i)=>`<div class="pl"><div class="sp"><b>${c.n}</b><div class="mut">${c.h} ore da certificare</div></div><button class="chip" data-cert="${i}">Certifica</button></div>`).join(''):'<p class="mut">Tutte le ore sono certificate.</p>';
+ $('#ver').innerHTML=VER.map((v,i)=>`<div class="pl"><div class="sp"><b>${v.t}</b><div class="mut">Registrato da uno studente della ${v.a}</div></div>${v.v?'<span class="badge b-g">Verificato</span>':`<button class="chip" data-ver="${i}">Verifica</button>`}</div>`).join('')}
+function drawCls(c){const d=CL[c],ok=d.n>=8;$$('#cls .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cl===c));$('#clsN').textContent=`${d.n} partecipanti al check-in (minimo per mostrare i dati: 8)`;$('#clsStress').hidden=!ok;$('#clsHide').hidden=ok;if(ok)bars('#clsBars',d.s,4.5,4);bars('#clsLoad',d.v,5,4)}
+const NOTIF=[{to:'stu',t:'Esci di casa alle 7:12: linea 32 in orario',s:{}},{to:'stu',t:'Verifica di Matematica giovedì: genera il piano di studio',s:{}},{to:'vol',t:'Hai 3 ore in attesa di certificazione',s:{}},{to:'sta',t:'3 richieste da assegnare',s:{}},{to:'doc',t:'2 riassunti audio da verificare',s:{}}];
+function ntf(to,t){NOTIF.unshift({to,t,s:{}});drawNotif()}
+function drawNotif(){const l=NOTIF.filter(n=>n.to.includes(role)),u=l.filter(n=>!n.s[role]).length;$('#bdot').hidden=!u;$('#bdot').textContent=u;$('#nlist').innerHTML=l.length?l.map(n=>`<div class="card"><div class="row"><div class="sp">${n.t}</div>${n.s[role]?'':'<span class="badge b-a">Nuova</span>'}</div></div>`).join(''):'<p class="mut">Nessuna notifica.</p>'}
+$('#bell').onclick=()=>{drawNotif();NOTIF.forEach(n=>{if(n.to.includes(role))n.s[role]=1});$('#bdot').hidden=true};
+const KIND={msg:'Consiglio',aud:'Riassunto audio',note:'Appunti',luogo:'Nuovo luogo'};
+const MOD=[{id:1,t:'Fisica: le onde',k:'aud',sub:'Fisica',f:'onde.mp3',st:'pend'},{id:2,t:'Appunti di Italiano: Verga',k:'note',sub:'Italiano',f:'verga.pdf',st:'pend'},{id:3,t:'Il metodo che mi ha salvato',k:'msg',sub:'Metodo di studio',txt:'Studia a blocchi da 25 minuti e poi fai una pausa vera.',st:'pend'}];
+let upT='msg';
+$('#upT').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;upT=b.dataset.t;$$('#upT .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#upTxtW').hidden=upT!=='msg';$('#upFileW').hidden=upT==='msg'};
+$('#upGo').onclick=()=>{const t=$('#upTitle').value.trim(),f=$('#upf').files[0];
+ if(!t)return toast('Aggiungi un titolo');if(upT==='msg'&&!$('#upTxt').value.trim())return toast('Scrivi il consiglio');
+ if(upT!=='msg'&&!f)return toast('Seleziona un file da caricare');if(f&&f.size>20e6)return toast('File troppo grande (max 20 MB)');
+ if(!$('#upC').checked)return toast('Conferma la dichiarazione sui diritti');
+ MOD.unshift({id:Date.now(),t,k:upT,sub:$('#upSub').value,mine:1,st:'pend',f:f&&f.name,txt:$('#upTxt').value.trim(),unl:$('#upUnl').value});
+ ['#upTitle','#upTxt'].forEach(s=>$(s).value='');$('#upf').value='';$('#upC').checked=false;ntf('doc','Nuovo contenuto da moderare: '+t);drawMod();toast('Inviato alla moderazione')};
+$('#plF').onclick=e=>{const b=e.target.closest('.chip');if(b)b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true')};
+$('#plGo').onclick=()=>{const n=$('#plN').value.trim(),fl=$$('#plF .chip').map(b=>b.getAttribute('aria-pressed')==='true');if(!n)return toast('Inserisci il nome del posto');MOD.unshift({id:Date.now(),t:n,k:'luogo',sub:$('#plA').value.trim()||'Indirizzo da verificare',mine:1,st:'pend',w:+fl[0],fr:+fl[1],a:+fl[2]});$('#plN').value=$('#plA').value='';ntf('doc','Nuovo luogo da approvare: '+n);drawMod();toast('Luogo inviato alla moderazione')};
+function drawMod(){const S={pend:['b-y','In moderazione'],ok:['b-g','Pubblicato'],no:['b-r','Non approvato']},line=m=>`<div class="sp"><b>${m.t}</b><div class="mut">${KIND[m.k]} · ${m.sub}${m.f&&m.k!=='luogo'?' · '+m.f:''}</div></div>`,my=MOD.filter(m=>m.mine);
+ $('#myUp').innerHTML=my.length?'<h2>I miei contributi</h2>'+my.map(m=>`<div class="card"><div class="row">${line(m)}<span class="badge ${S[m.st][0]}">${S[m.st][1]}</span></div></div>`).join(''):'';
+ const ok=MOD.filter(m=>m.st==='ok'&&m.k!=='luogo');$('#appr').innerHTML=ok.length?ok.map(m=>`<div class="pl">${line(m)}<span class="badge b-a">${m.unl&&m.unl.includes('settembre')?'Si sblocca 14/9/2027':'Disponibile'}</span></div>`).join(''):'<p class="mut">Qui compariranno i contenuti approvati dalla scuola.</p>';
+ const q=MOD.filter(m=>m.st==='pend');$('#mod').innerHTML=q.length?q.map(m=>`<div class="pl">${line(m)}<button class="chip" data-ok="${m.id}">Approva</button><button class="chip" data-ko="${m.id}">Rifiuta</button></div>`).join(''):'<p class="mut">Nessun contenuto in attesa.</p>'}
+function sendReq(){const wh=$('#rWho .chip[aria-pressed="true"]').textContent,day=$('#rDay').value,tm=$('#rTime').value.trim()||'orario da definire',lc=$('#rWhere').value.trim();
+ if(!lc)return toast('Indica da dove a dove ti serve aiuto');
+ REQ.unshift({s:uname.split(' ')[0]+', 5EI',k:sup,w:day+' '+tm,loc:lc,note:$('#rNote').value.trim(),pref:wh,rep:$('#rRep').checked,st:'new',mine:1});
+ ['#rTime','#rWhere','#rNote'].forEach(s=>$(s).value='');ntf('vol sta','Nuova richiesta: '+sup+' ('+day+')');drawRoles();drawMine();toast('Richiesta inviata al coordinatore')}
+function drawMine(){const m=REQ.map((r,i)=>({...r,i})).filter(r=>r.mine);$('#mine').innerHTML=m.length?m.map(r=>`<div class="card"><div class="row">${who(r)}<span class="badge ${r.st==='acc'?'b-g':r.st==='ass'?'b-a':'b-y'}">${r.st==='new'?'In attesa':r.st==='ass'?'Assegnata a '+r.by:'Confermata da '+r.by}</span></div>${r.st==='new'?`<div class="fld"><button class="chip" data-can="${r.i}">Annulla richiesta</button></div>`:''}</div>`).join(''):'<p class="mut">Non hai richieste attive.</p>'}
+$('#rWho').onclick=e=>{const b=e.target.closest('.chip');if(b)$$('#rWho .chip').forEach(x=>x.setAttribute('aria-pressed',x===b))};
+document.addEventListener('click',e=>{const t=e.target.closest('button');if(!t)return;const d=t.dataset;
+ if(d.cl){drawCls(d.cl);return}
+ if(d.star){toast('Valutazione '+d.star+'★ inviata');return}
+ if(d.acc!==undefined){Object.assign(REQ[d.acc],{st:'acc',by:uname});pend++;ntf('stu sta','Richiesta accettata da '+uname+': '+REQ[d.acc].k);toast('Richiesta accettata')}
+ else if(d.no!==undefined)REQ[d.no].skip=true;
+ else if(d.ass!==undefined){Object.assign(REQ[d.ass],{st:'ass',by:$('#sel'+d.ass).value});ntf('stu vol','Richiesta assegnata a '+REQ[d.ass].by+': '+REQ[d.ass].k);toast('Richiesta assegnata')}
+ else if(d.can!==undefined){REQ.splice(d.can,1);toast('Richiesta annullata')}
+ else if(d.ok||d.ko){const m=MOD.find(x=>x.id==(d.ok||d.ko)),y=!!d.ok;m.st=y?'ok':'no';if(y&&m.k==='luogo'){P.push({n:m.t,x:50+Math.random()*300|0,y:40+Math.random()*130|0,h:'Orari da verificare',w:m.w,f:m.fr,a:m.a,r:0});drawMap()}ntf('stu vol',`Contenuto ${y?'pubblicato':'non approvato'}: ${m.t}`);toast(y?'Contenuto approvato':'Contenuto rifiutato')}
+ else if(d.cert!==undefined){CERT.splice(d.cert,1);toast('Ore certificate')}
+ else if(d.ver!==undefined){VER[d.ver].v=1;toast('Riassunto verificato')}
+ else return;drawRoles();drawMine();drawMod()});
+$('#avail').onclick=e=>{const b=e.target.closest('.chip');if(b)b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true')};
+$('#gita').onclick=()=>toast('Buddy assegnato alla gita');
+
+function applyRole(){const R=ROLE[role];$('#nav').innerHTML=R.tabs.map(([k,i])=>`<button data-go="${k}">${ico(i)}${T[k]}</button>`).join('');
+ $$('[data-r]').forEach(e=>e.hidden=!e.dataset.r.split(' ').includes(role));
+ $$('.av').forEach(a=>a.textContent=uname.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase());
+ $('#pName').textContent=uname;$('#roleTxt').textContent=(role==='stu'?'5EI · ':'')+R.n;drawNotif()}
+let pick=null;let regMode=false;const age=()=>{const v=$('#dob').value;return v?(Date.now()-new Date(v))/31557600000:99};
+const chk=()=>{$('#parent').hidden=!(regMode&&age()<18);const okR=!regMode||($('#mail').value.includes('@')&&$('#pwd').value.length>=8&&$('#dob').value&&(age()>=18||$('#pmail').value.includes('@')));$('#enter').disabled=!(pick&&$('#priv').checked&&okR)};
+['#mail','#pwd','#dob','#pmail'].forEach(s=>$(s).oninput=chk);
+$('#mIn').onclick=$('#mReg').onclick=e=>{regMode=e.target.id==='mReg';$('#mIn').setAttribute('aria-pressed',!regMode);$('#mReg').setAttribute('aria-pressed',regMode);$('#regOnly').hidden=!regMode;if(regMode){$('#mail').value='';$('#pwd').value='';$('#uname').value=''}else if(pick)$('#roles .rc[aria-pressed="true"]').click();chk()};
+$('#roles').innerHTML=Object.entries(ROLE).map(([k,r])=>`<button class="link rc" data-k="${k}" aria-pressed="false"><span class="ic">${ico(r.i)}</span><span class="sp"><b>${r.n}</b><br><span class="mut">${r.d}</span></span></button>`).join('');
+$('#roles').onclick=e=>{const b=e.target.closest('.rc');if(!b)return;pick=b.dataset.k;$$('#roles .rc').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#uname').value=ROLE[pick].u;if(!regMode){$('#mail').value=ROLE[pick].u.toLowerCase().replace(/[^a-z]+/g,'.')+'@scuola.edu.it';$('#pwd').value='password123'}$('#enter').textContent='Accedi come '+ROLE[pick].n;chk()};
+$('#priv').onchange=chk;
+$('#enter').onclick=()=>{role=pick;uname=$('#uname').value.trim()||ROLE[role].u;$('#login').hidden=true;applyRole();hist=[ROLE[role].tabs[0][0]];go(hist[0],true)};
+drawRoles();drawCls('5EI');drawMine();drawMod();drawNotif();
+
+/* PROFILO E TEMA */
+const ACC={Lime:['#D4FF4F','#EEF9C9','#D4FF4F','#2B3A12','#6B4DE0','#C2B3FF','#0A0B1F'],Viola:['#7C5CFF','#E6E0FF','#8F73FF','#2C2358','#6B4DE0','#C2B3FF','#fff'],Rosa:['#FF5FA2','#FFE0EE','#FF5FA2','#4A1A33','#C21F6B','#FF9CC8','#0A0B1F'],Ciano:['#4FE3FF','#D9F7FF','#4FE3FF','#0F3A45','#0B7C94','#7FEBFF','#0A0B1F']};
+let mode='auto',acc='Lime';
+function applyTheme(){const r=document.documentElement,s=r.style,dk=mode==='dark'||(mode==='auto'&&matchMedia('(prefers-color-scheme:dark)').matches),a=ACC[acc];
+ r.dataset.theme=dk?'dark':'light';s.setProperty('--ac',dk?a[2]:a[0]);s.setProperty('--acs',dk?a[3]:a[1]);s.setProperty('--tx',dk?a[5]:a[4]);s.setProperty('--onac',a[6]);
+ [['--land',dk?'#12153A':'#E9E6FA'],['--road',dk?'#262B66':'#fff'],['--water',dk?'#16406B':'#BFE9F5'],['--park',dk?'#2B4A12':'#D8F5A8']].forEach(([k,v])=>s.setProperty(k,v));
+ $$('#mode button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===mode));
+ $('#sw').innerHTML=Object.keys(ACC).map(k=>`<button class="swb" data-a="${k}" aria-label="${k}" aria-pressed="${k===acc}" style="background:${dk?ACC[k][2]:ACC[k][0]}"></button>`).join('')}
+$('#mode').onclick=e=>{const b=e.target.closest('button');if(b){mode=b.dataset.m;applyTheme()}};
+$('#sw').onclick=e=>{const b=e.target.closest('button');if(b){acc=b.dataset.a;applyTheme()}};
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',applyTheme);
+$('#logout').onclick=()=>{$('#login').hidden=false};
+$('#profilo').onchange=e=>{if(e.target.type==='checkbox')toast(e.target.checked?'Attivato':'Disattivato')};
+$('#exp').onclick=()=>toast('Export dei dati richiesto');
+$('#wipe').onclick=()=>toast('Dati eliminati (simulazione)');
+applyTheme();go('oggi',true);
+</script>
+</body>
+</html>

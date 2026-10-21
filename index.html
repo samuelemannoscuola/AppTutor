@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>App Tutor Studenti – La scuola, tutta in un'app</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F2FF;--fg:#12143A;--mut:#585D94;--card:#fff;--line:#DAD7F4;--lime:#D4FF4F;--vio:#7C5CFF;--pink:#FF5FA2;--cy:#4FE3FF;--ink:#0A0B1F;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#090A1E;--fg:#F4F3FF;--mut:#A7ABD8;--card:#14173D;--line:#2A2F66}}
+:root[data-theme="dark"]{--bg:#090A1E;--fg:#F4F3FF;--mut:#A7ABD8;--card:#14173D;--line:#2A2F66}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.5;overflow-x:hidden}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main,footer{position:relative;z-index:1}
+a{color:inherit}
+#bar{position:fixed;top:0;left:0;right:0;height:3px;background:var(--lime);transform:scaleX(0);transform-origin:0 50%;z-index:30}
+.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) 5vw 14px}
+.top b{font-size:20px;letter-spacing:-.02em;font-weight:800}
+.pill,.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:12px 22px;background:var(--lime);color:var(--ink);font-weight:800;text-decoration:none;border:0;font-family:inherit;font-size:16px;cursor:pointer;will-change:transform}
+.btn.big{padding:20px 38px;font-size:20px}.btn.ghost{background:transparent;color:var(--fg);border:2px solid var(--fg)}
+:focus-visible{outline:3px solid var(--vio);outline-offset:3px}
+section{position:relative;padding:0 5vw}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:90px;overflow:hidden}
+h1{font-size:clamp(44px,9.4vw,150px);line-height:.92;letter-spacing:-.045em;font-weight:800;margin:0 0 28px;max-width:11em}
+h2{font-size:clamp(34px,6vw,90px);line-height:.98;letter-spacing:-.04em;font-weight:800;margin:0 0 22px}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}.w>span{display:inline-block}
+.it{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;color:var(--vio)}
+.sub{max-width:34em;font-size:clamp(18px,2vw,24px);color:var(--mut);margin:0 0 30px}
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;pointer-events:none}
+.hint{position:absolute;bottom:26px;left:5vw;font-size:13px;color:var(--mut);letter-spacing:.12em;text-transform:uppercase}
+.story{padding-top:20vh;padding-bottom:10vh;position:relative}
+.bigword{position:absolute;top:8vh;left:0;font-size:clamp(120px,30vw,520px);font-weight:800;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:2px var(--line);white-space:nowrap;pointer-events:none;line-height:1}
+.words{font-size:clamp(26px,4.4vw,60px);line-height:1.1;letter-spacing:-.025em;font-weight:800;max-width:17em;margin:0 0 34vh;position:relative}
+.words.last{margin-bottom:0}
+.wd{opacity:.15}
+#tour{height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4vw;overflow:hidden}
+.steps{position:relative;height:360px}
+.step{position:absolute;inset:0}
+.step small{display:inline-block;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600;margin-bottom:14px}
+.step h3{font-size:clamp(34px,5vw,72px);line-height:.98;letter-spacing:-.04em;font-weight:800;margin:0 0 14px}
+.step p{font-size:clamp(17px,1.7vw,22px);color:var(--mut);max-width:26em;margin:0}
+#dots{position:absolute;left:5vw;bottom:28px;display:flex;gap:8px}
+#dots i{width:26px;height:5px;border-radius:3px;background:var(--line);transition:background .3s,width .3s}#dots i.on{background:var(--vio);width:44px}
+.stage{perspective:1400px;display:flex;justify-content:center}
+.scale{transform:scale(var(--ps,1))}
+.float{animation:fl 5s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-14px)}}
+.phone{position:relative;width:260px;height:540px;border-radius:40px;background:#0b0c1c;padding:9px;transform-style:preserve-3d;box-shadow:0 0 0 2px #2b2e55 inset,0 40px 80px rgba(20,10,80,.45)}
+.phone::before,.phone::after{content:"";position:absolute;inset:0;border-radius:40px;background:#1a1c3d;transform:translateZ(-8px)}
+.phone::after{background:#0b0c1c;transform:translateZ(-16px)}
+.notch{position:absolute;top:16px;left:50%;width:78px;height:20px;border-radius:12px;background:#000;transform:translate(-50%,2px);z-index:5}
+.scr{position:absolute;inset:9px;border-radius:32px;overflow:hidden;background:#EEF1FA;color:#1B2140;padding:46px 14px 14px;font-size:11px;line-height:1.35}
+.scr .hd{font-size:17px;font-weight:800;margin-bottom:8px}
+.hero2{background:#3347E8;color:#fff;border-radius:16px;padding:14px;margin-bottom:8px}.hero2 b{display:block;font-size:22px;line-height:1.1;margin:3px 0}
+.r2{display:flex;gap:9px;align-items:center;background:#fff;border:1px solid #DDE1EF;border-radius:13px;padding:9px;margin-bottom:7px}
+.d{width:26px;height:26px;border-radius:8px;background:#E4E8FF;flex:none}.d.y{background:#FFF1CC}.d.v{background:#DDF4E7}
+.r2 small,.scr small{color:#5C6485;font-size:10px}
+.prog{height:6px;border-radius:3px;background:#E4E8FF;margin:6px 0 12px;overflow:hidden}.prog i{display:block;width:30%;height:100%;background:#3347E8}
+.opt{border:1.5px solid #DDE1EF;background:#fff;border-radius:10px;padding:9px;margin-bottom:6px}.opt.on{border-color:#3347E8;background:#E4E8FF;font-weight:700}
+.chipx{display:inline-block;border:1px solid #DDE1EF;background:#fff;border-radius:99px;padding:4px 9px;margin:0 3px 5px 0}.chipx.on{background:#3347E8;color:#fff;border-color:#3347E8}
+.fk{border:1px solid #DDE1EF;background:#fff;border-radius:9px;padding:8px;margin-bottom:6px;color:#5C6485}
+.go{background:#3347E8;color:#fff;border-radius:10px;padding:9px;text-align:center;font-weight:700;margin:8px 0}
+.bd{display:inline-block;border-radius:6px;padding:2px 7px;font-weight:700;background:#DDF4E7;color:#1E9E5E}
+.pl{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid #DDE1EF;border-radius:12px;padding:8px;margin-bottom:6px}.pl i{width:24px;height:24px;border-radius:50%;background:#3347E8;flex:none}
+.band{padding:18vh 0;overflow:hidden}
+.mq{white-space:nowrap;font-size:clamp(50px,11vw,180px);font-weight:800;letter-spacing:-.04em;line-height:1.05;width:max-content}
+.mq.o{color:transparent;-webkit-text-stroke:2px var(--fg)}.mq.f{color:var(--lime);-webkit-text-stroke:0;text-shadow:0 0 0 var(--ink)}
+.roles{padding-top:14vh;padding-bottom:14vh}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;perspective:1000px}
+.rc{border-radius:28px;padding:28px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;color:var(--ink);transition:transform .25s}
+.rc b{font-size:30px;line-height:1;letter-spacing:-.03em}.rc p{margin:10px 0 0;font-size:16px}.rc span{font-size:60px;font-weight:800;line-height:1;opacity:.35}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;padding-bottom:16vh}
+.nums div{border-top:2px solid var(--fg);padding-top:14px}.nums b{display:block;font-size:clamp(60px,9vw,140px);line-height:1;letter-spacing:-.05em;font-weight:800}
+.cta{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-top:10vh;padding-bottom:10vh}
+.cta .box{background:var(--card);border:1px solid var(--line);border-radius:36px;padding:clamp(28px,5vw,70px);width:100%;position:relative;overflow:hidden}
+.tips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 30px;padding:0;list-style:none}.tips li{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:14px;color:var(--mut)}
+footer{padding:8vh 5vw calc(8vh + env(safe-area-inset-bottom,0px));color:var(--mut);font-size:15px;border-top:1px solid var(--line)}
+footer b{color:var(--fg)}
+.plans{padding-top:14vh;padding-bottom:14vh}
+.tog{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px;margin:0 0 34px}
+.tog button{border:0;background:transparent;color:var(--fg);font:inherit;font-weight:600;padding:10px 20px;border-radius:999px;cursor:pointer}
+.tog button.on{background:var(--ink);color:var(--lime)}
+.tog small{background:var(--lime);color:var(--ink);border-radius:99px;padding:1px 8px;margin-left:6px;font-size:12px;font-weight:800}
+.pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:stretch}
+.pc{position:relative;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:30px;display:flex;flex-direction:column}
+.pc h3{font-size:28px;margin:0 0 4px;letter-spacing:-.03em}.pc p{margin:0;font-size:15px;opacity:.85}
+.pc .pr{font-size:clamp(38px,5vw,56px);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin:14px 0 0}.pc .pr small{font-size:16px;font-weight:600;letter-spacing:0;opacity:.7}
+.pc ul{list-style:none;padding:0;margin:20px 0 26px;flex:1}.pc li{padding:7px 0 7px 26px;position:relative;font-size:16px;line-height:1.35}.pc li::before{content:"✓";position:absolute;left:0;font-weight:800;color:var(--vio)}
+.pc.hot{background:var(--lime);color:var(--ink);border:0}.pc.hot li::before{color:var(--ink)}.pc.hot .btn{background:var(--ink);color:var(--lime)}
+.pc.dark{background:var(--vio);color:#fff;border:0}.pc.dark li::before{color:var(--lime)}.pc.dark .btn{background:#fff;color:var(--ink)}
+.tag{position:absolute;top:-12px;right:24px;background:var(--ink);color:var(--lime);border-radius:99px;padding:4px 14px;font-size:13px;font-weight:800}
+.pc .btn{justify-content:center}.note{margin-top:24px;color:var(--mut);font-size:15px;max-width:42em}
+.rm #tour{height:auto;padding:12vh 5vw}.rm .steps{display:block;height:auto}.rm .step{position:static;opacity:1;visibility:visible;margin-bottom:40px}.rm .wd{opacity:1}.rm .float{animation:none}
+html{overflow-x:hidden;-webkit-text-size-adjust:100%}.story{overflow:hidden}
+.steps{display:grid;height:auto}.step{position:static;grid-area:1/1}
+@media(max-width:800px){
+ .hero{min-height:100vh;min-height:100svh;padding-top:80px}
+ h1{font-size:clamp(38px,11.5vw,64px)}h2{font-size:clamp(32px,10vw,56px)}
+ .sub{font-size:17px}.btn.big{padding:16px 26px;font-size:18px}
+ .top b{font-size:18px}.pill{padding:10px 16px;font-size:14px}
+ .cta{min-height:auto;padding-top:8vh;padding-bottom:8vh}.roles{padding-top:10vh;padding-bottom:10vh}.band{padding:10vh 0}
+ .rc{min-height:220px}.nums b{font-size:clamp(52px,16vw,90px)}
+ #tour{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:center;gap:0;height:100vh;height:100svh;padding-top:70px;padding-bottom:50px}
+ .stage{order:-1;height:340px;align-items:center}.scale{--ps:.58}
+ .step h3{font-size:clamp(28px,8.4vw,40px)}.step p{font-size:15px;line-height:1.4}.step small{margin-bottom:8px}
+ #dots{bottom:calc(16px + env(safe-area-inset-bottom,0px))}}
+@media(max-width:800px) and (max-height:720px){.stage{height:270px}.scale{--ps:.46}.step p{font-size:14px}}
+@media(max-width:800px) and (max-height:600px){.stage{height:210px}.scale{--ps:.36}#tour{padding-top:56px}}
+@media(min-width:801px) and (max-height:700px){.scale{--ps:.8}}
+@media(max-height:700px){.hint{display:none}}
+@media(max-height:500px){.scale{--ps:.5}.step h3{font-size:26px}.step p{font-size:13px}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav class="top"><b>AppTutor</b><a class="pill mag" href="#testa">Testa l'app</a></nav>
+<canvas id="gl" aria-hidden="true"></canvas>
+<main>
+
+<section class="hero">
+  <div class="blob" data-s=".25" style="width:40vw;height:40vw;background:var(--vio);right:-8vw;top:6vh"></div>
+  <div class="blob" data-s=".5" style="width:26vw;height:26vw;background:var(--pink);left:-6vw;bottom:8vh"></div>
+  <h1 class="split">Studiare è una *corsa.* Non devi farla *da* *solo.*</h1>
+  <p class="sub">App Tutor Studenti riunisce in un'unica app studio, benessere, inclusione, autobus e memoria della scuola. Costruita da due studenti, per tutti gli studenti.</p>
+  <div><a class="btn big mag" href="#storia">Scopri la storia ↓</a></div>
+  <div class="hint">Scorri</div>
+</section>
+
+<section class="story" id="storia">
+  <div class="bigword" id="bw" aria-hidden="true">06:40</div>
+  <p class="words">Sono le sei e quaranta. La sveglia suona e hai già tre pensieri in testa.</p>
+  <p class="words">La verifica di giovedì. Un autobus che forse non passa. E quella stanchezza che non se ne va da settimane.</p>
+  <p class="words">Nessuna app ti ha mai chiesto come stai. Nessuna sa che quell'autobus ti serve per quella verifica.</p>
+  <p class="words last">Siamo partiti da qui. E abbiamo messo tutto insieme.</p>
+</section>
+
+<section id="tour" aria-label="Le funzioni dell'app">
+  <div class="steps">
+    <div class="step"><small>01 · Organizzatore</small><h3>Il caos, in un <span class="it">calendario</span></h3><p>Verifiche, compiti, sport e lavoro in un unico posto. Un piano di studio settimanale che si adatta a come stai.</p></div>
+    <div class="step"><small>02 · MindCheck</small><h3>Ascolta come <span class="it">stai</span></h3><p>Dieci domande, due minuti. Un semaforo privato ti avvisa prima che la stanchezza diventi un muro. Ai docenti arrivano solo dati anonimi di classe.</p></div>
+    <div class="step"><small>03 · Autobus</small><h3>Arriva in <span class="it">orario</span></h3><p>Posizione dal vivo, ritardi, affollamento e l'ora giusta per uscire di casa, calcolata sulla tua prima lezione.</p></div>
+    <div class="step"><small>04 · Al Tuo Fianco</small><h3>Non sei <span class="it">solo</span></h3><p>Chiedi un compagno o un operatore per spostarti, per una gita, per i materiali. Tu scegli quale aiuto. La scuola coordina e certifica le ore dei volontari.</p></div>
+    <div class="step"><small>05 · Capsula del Tempo</small><h3>L'esperienza non va <span class="it">persa</span></h3><p>Gli studenti dell'ultimo anno lasciano consigli, appunti e riassunti audio per chi inizia. Si sbloccano a settembre.</p></div>
+  </div>
+  <div class="stage"><div class="scale"><div class="float"><div class="phone" id="phone"><div class="notch"></div>
+    <div class="scr"><div class="hd">Oggi</div><div class="hero2"><small>Prima lezione alle 8:00</small><b>Esci di casa alle 7:12</b><small>Linea 32 · arriva tra 4 min</small></div><div class="r2"><div class="d y"></div><span><b>MindCheck</b><br><small>3 verifiche questa settimana</small></span></div><div class="r2"><div class="d"></div><span><b>Oggi da fare</b><br><small>Esercizi di Inglese</small></span></div><div class="r2"><div class="d v"></div><span><b>Per il tragitto</b><br><small>Playlist Storia · 28 min</small></span></div></div>
+    <div class="scr"><div class="hd">MindCheck</div><div class="row"><small>Umore · 3 di 10</small></div><div class="prog"><i></i></div><p style="font-size:13px;font-weight:700;margin:0 0 10px">Quanto spesso ti sei sentito giù o irritabile?</p><div class="opt">Mai</div><div class="opt">Qualche giorno</div><div class="opt on">Più di metà dei giorni</div><div class="opt">Quasi ogni giorno</div><div class="go">Avanti</div></div>
+    <div class="scr" style="padding:46px 0 0"><div class="hd" style="padding:0 14px">Autobus</div><svg viewBox="0 0 240 230" style="width:100%;display:block"><rect width="240" height="230" fill="#EEF0E8"/><path d="M-5 150C40 135 80 170 130 155S210 135 245 148V185C210 172 170 195 130 192S40 170 -5 185Z" fill="#B9D6F2"/><rect x="14" y="14" width="56" height="34" rx="8" fill="#C9E6C3"/><path d="M0 80H240M0 42H240M72 0V150M160 0V150" stroke="#fff" stroke-width="6" fill="none"/><path id="rt" d="M0 80H72V42H160V80H210" stroke="#3347E8" stroke-width="4" fill="none" stroke-linejoin="round"/><circle r="7" fill="#1E9E5E"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#rt"/></animateMotion></circle><circle cx="116" cy="42" r="4" fill="#fff" stroke="#1B2140" stroke-width="2"/><circle cx="210" cy="80" r="4" fill="#fff" stroke="#1B2140" stroke-width="2"/></svg><div style="padding:10px 14px"><b style="font-size:22px">4 min</b> <span class="bd" style="background:#FFF1CC;color:#B07800">Affollamento medio</span><br><small>Linea 32 · fermata Piazza Mazzini</small></div></div>
+    <div class="scr"><div class="hd">Al Tuo Fianco</div><span class="chipx on">Cambio aula</span><span class="chipx">Palestra</span><span class="chipx">Gita</span><div class="fk">Oggi · 10:00</div><div class="fk">Aula 12 → Palestra</div><div class="go">Richiedi supporto</div><div class="pl"><i style="background:#1E9E5E"></i><span><b>Assegnata a Giulia R.</b><br><small>Confermata · referente prof.ssa Neri</small></span></div></div>
+    <div class="scr"><div class="hd">Capsula del Tempo</div><div class="pl" style="background:#E4E8FF"><i style="background:#7C5CFF"></i><span><b>12 consigli chiusi</b><br><small>Si sbloccano il 14 settembre 2027</small></span></div><div class="pl"><i></i><span><b>Storia: la Guerra Fredda</b><br><small>9 min · Prof. verificato</small></span></div><div class="pl"><i></i><span><b>Matematica: derivate</b><br><small>12 min · Non verificato</small></span></div><div class="go">Carica appunti o audio</div></div>
+  </div></div></div></div>
+  <div id="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+</section>
+
+<section class="band" aria-hidden="true">
+  <div class="mq o" id="m1">PRIVACY BY DESIGN ✦ GDPR ✦ DATI CIFRATI ✦ SOLO DATI ANONIMI AI DOCENTI ✦</div>
+  <div class="mq f" id="m2">STUDIO ✦ BENESSERE ✦ INCLUSIONE ✦ TRASPORTI ✦ COMUNITÀ ✦ STUDIO ✦ BENESSERE ✦</div>
+</section>
+
+<section class="roles">
+  <h2>Un'app, <span class="it">quattro</span> modi di viverla</h2>
+  <div class="cards">
+    <div class="rc" style="background:var(--lime)"><span>01</span><div><b>Studente</b><p>Organizza lo studio, controlla il tuo benessere, prendi l'autobus e chiedi aiuto quando serve.</p></div></div>
+    <div class="rc" style="background:var(--cy)"><span>02</span><div><b>Volontario buddy</b><p>Accompagna i compagni, scegli quando sei disponibile e raccogli ore certificate per i PCTO.</p></div></div>
+    <div class="rc" style="background:var(--pink)"><span>03</span><div><b>Personale</b><p>Docenti di sostegno ed educatori coordinano le richieste e certificano il lavoro dei volontari.</p></div></div>
+    <div class="rc" style="background:#9C86FF"><span>04</span><div><b>Docente</b><p>Vede il carico della classe in forma anonima e verifica i riassunti prima che vengano pubblicati.</p></div></div>
+  </div>
+</section>
+
+<section class="nums">
+  <div><b data-n="6">0</b>moduli collegati tra loro</div>
+  <div><b data-n="4">0</b>ruoli, ognuno con i suoi permessi</div>
+  <div><b data-n="1">0</b>sola app da aprire</div>
+  <div><b data-n="0">0</b>dati individuali mostrati ai docenti</div>
+</section>
+
+<section class="plans" id="piani">
+  <h2>Piani <span class="it">semplici</span></h2>
+  <p class="sub">Il benessere e l'inclusione non sono mai a pagamento per lo studente. Le funzioni in più sono facoltative.</p>
+  <div class="tog" role="group" aria-label="Periodo di fatturazione"><button class="on" data-b="m" aria-pressed="true">Mensile</button><button data-b="y" aria-pressed="false">Annuale <small>-33%</small></button></div>
+  <div class="pcards">
+    <article class="pc"><h3>Base</h3><p>Per iniziare e organizzare lo studio.</p><div class="pr">Gratis</div>
+      <ul><li>Organizzatore di studio e calendario unico</li><li>MindCheck settimanale con semaforo privato</li><li>Mappa dei posti sicuri</li><li>Capsula del Tempo: leggi e contribuisci</li><li>Al Tuo Fianco per studenti e volontari</li></ul>
+      <a class="btn ghost" href="#testa">Prova il mockup</a></article>
+    <article class="pc hot"><span class="tag">Il più scelto</span><h3>Plus</h3><p>Per chi viaggia e studia ogni giorno.</p><div class="pr"><span id="pp">2,99</span> €<small id="pper">/mese</small></div>
+      <ul><li>Tutto il piano Base</li><li>Autobus in tempo reale con avviso su quando uscire di casa</li><li>Piano di studio adattivo in base al tuo MindCheck</li><li>Riassunti audio offline e playlist per il tragitto</li><li>Notifiche avanzate e temi personalizzati</li></ul>
+      <a class="btn" href="#sondaggio">Dicci cosa ne pensi</a></article>
+    <article class="pc dark"><h3>Scuola</h3><p>Per l'istituto, a beneficio di tutti.</p><div class="pr">Su preventivo</div>
+      <ul><li>Piano Plus per tutti gli studenti dell'istituto</li><li>Pannello docenti con dati anonimi di classe</li><li>Coordinamento Al Tuo Fianco e certificazione ore PCTO</li><li>Moderazione dei contenuti e account per ruolo</li><li>Supporto e conformità GDPR</li></ul>
+      <a class="btn" href="#sondaggio">Parlane con la tua scuola</a></article>
+  </div>
+  <p class="note">Ipotesi di piani con prezzi indicativi: li stiamo valutando insieme a te nel sondaggio. Il piano annuale per Plus costa 23,99 €.</p>
+</section>
+
+<section class="cta" id="testa">
+  <div class="box">
+    <div class="blob" data-s=".3" style="width:30vw;height:30vw;background:var(--vio);right:-6vw;top:-8vw"></div>
+    <h2 style="position:relative">Testa <span class="it">l'app</span></h2>
+    <p class="sub" style="position:relative">Questo è un mockup interattivo: nessuna installazione, nessun dato reale. Entra con uno dei quattro ruoli e prova le funzioni.</p>
+    <ul class="tips" style="position:relative"><li>Da studente, invia una richiesta di aiuto</li><li>Esci e rientra come personale per assegnarla</li><li>Carica un riassunto nella Capsula</li><li>Fai il questionario MindCheck</li></ul>
+    <a class="btn big mag" style="position:relative" href="app.html" target="_blank" rel="noopener">Apri il mockup →</a>
+  </div>
+</section>
+
+<section class="cta" id="sondaggio">
+  <div class="box" style="background:var(--lime);color:var(--ink);border:0">
+    <h2>Aiutaci a <span class="it" style="color:var(--ink)">costruirla</span></h2>
+    <p class="sub" style="color:var(--ink)">L'app nasce per gli studenti, quindi vogliamo sentire te. Pochi minuti per dirci cosa ti serve davvero e cosa ti farebbe usare l'app ogni giorno.</p>
+    <a class="btn big mag" style="background:var(--ink);color:var(--lime)" href="sondaggio.html" target="_blank" rel="noopener" id="survey">Vai al sondaggio</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p><b>App Tutor Studenti</b> · progetto di Gestione del progetto, classe 5EI, a.s. 2026/2027</p>
+  <p>Samuele Manno e Benedetta Rucco</p>
+  <p>App Tutor Studenti non è uno strumento medico. Per situazioni di disagio parla con una persona di fiducia o con lo sportello d'ascolto della scuola.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(rm)document.documentElement.classList.add('rm');
+const wrap=(t,c)=>t.trim().split(/\s+/).map(w=>w[0]==='*'?`<span class="${c}"><span class="it">${w.slice(1)}</span></span>`:`<span class="${c}"><span>${w}</span></span>`).join(' ');
+$$('.split').forEach(e=>e.innerHTML=wrap(e.textContent,'w'));
+$$('.words').forEach(e=>e.innerHTML=e.textContent.trim().split(/\s+/).map(w=>`<span class="wd">${w}</span>`).join(' '));
+
+/* 3D di sfondo */
+if(window.THREE){
+ const R=new THREE.WebGLRenderer({canvas:$('#gl'),alpha:true,antialias:true});R.setPixelRatio(Math.min(devicePixelRatio,2));
+ const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(45,1,.1,100);cam.position.z=9;
+ sc.add(new THREE.AmbientLight(0xffffff,.75));const dl=new THREE.DirectionalLight(0xffffff,1.1);dl.position.set(4,6,8);sc.add(dl);
+ const mk=(g,c,x,y,z)=>{const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:c,roughness:.35,metalness:.1,flatShading:true}));m.userData={x,y};m.position.set(x,y,z);sc.add(m);return m};
+ const O=[mk(new THREE.IcosahedronGeometry(1.5,0),0xD4FF4F,4.2,1.2,-1),mk(new THREE.TorusGeometry(1.1,.38,16,48),0x7C5CFF,-5,-1,-2),mk(new THREE.OctahedronGeometry(1,0),0xFF5FA2,-3.6,3,-3),mk(new THREE.TorusKnotGeometry(.7,.22,80,12),0x4FE3FF,5.2,-3.2,-2),mk(new THREE.SphereGeometry(.5,24,16),0xD4FF4F,-6,4,-5)];
+ let lw=0;const fit=()=>{const w=innerWidth;if(w===lw)return;lw=w;const h=innerHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();O.forEach(o=>o.scale.setScalar(w<700?.6:1))};fit();addEventListener('resize',fit);
+ let mx=0,my=0;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+ const loop=t=>{const s=scrollY/innerHeight;O.forEach((o,i)=>{o.rotation.x=t*.0003*(i+1)+s*.6;o.rotation.y=t*.0004+s*.8;
+  o.position.y+=(o.userData.y+Math.sin(s*1.1+i)*2.4+Math.sin(t*.001+i)*.25-o.position.y)*.06;
+  o.position.x+=(o.userData.x+Math.cos(s*.8+i)*1.2+mx*(1+i*.5)-o.position.x)*.06});
+  R.render(sc,cam);if(!rm)requestAnimationFrame(loop)};requestAnimationFrame(loop);
+}
+
+/* Animazioni allo scroll */
+if(window.gsap&&!rm){
+ gsap.registerPlugin(ScrollTrigger);ScrollTrigger.config({ignoreMobileResize:true});
+ gsap.from('.hero .w>span',{yPercent:115,stagger:.07,duration:1.1,ease:'power4.out',delay:.15});
+ gsap.from('.hero .sub,.hero .btn,.hint',{y:30,opacity:0,stagger:.12,duration:.9,delay:.9});
+ gsap.to('#bar',{scaleX:1,ease:'none',scrollTrigger:{start:0,end:'max',scrub:true}});
+ $$('[data-s]').forEach(el=>gsap.to(el,{y:()=>-innerHeight*el.dataset.s,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:true}}));
+ $$('.words').forEach(el=>gsap.to(el.querySelectorAll('.wd'),{opacity:1,stagger:.12,ease:'none',scrollTrigger:{trigger:el,start:'top 82%',end:'bottom 48%',scrub:true}}));
+ gsap.fromTo('#bw',{xPercent:10},{xPercent:-45,ease:'none',scrollTrigger:{trigger:'.story',start:'top bottom',end:'bottom top',scrub:true}});
+ gsap.fromTo('.stage',{y:260,scale:.7,opacity:0,rotationZ:12},{y:0,scale:1,opacity:1,rotationZ:0,ease:'power2.out',scrollTrigger:{trigger:'#tour',start:'top bottom',end:'top top',scrub:true}});
+
+ const steps=$$('.step'),scr=$$('.phone .scr'),dots=$$('#dots i'),P=[[-22,8],[24,-6],[-28,10],[18,-12],[0,0]];
+ gsap.set(steps,{autoAlpha:0,y:40});gsap.set(steps[0],{autoAlpha:1,y:0});gsap.set(scr,{opacity:0});gsap.set(scr[0],{opacity:1});gsap.set('#phone',{rotationY:-22,rotationX:8});
+ const tl=gsap.timeline({defaults:{ease:'power2.inOut'},scrollTrigger:{trigger:'#tour',start:'top top',end:'+=500%',pin:true,scrub:.7,onUpdate:s=>{const k=Math.min(4,Math.floor(s.progress*5));dots.forEach((d,i)=>d.classList.toggle('on',i===k))}}});
+ P.forEach((p,i)=>{if(i){tl.to(scr[i-1],{opacity:0,duration:.25},i-.15).to(scr[i],{opacity:1,duration:.25},i-.1).to(steps[i-1],{autoAlpha:0,y:-40,duration:.3},i-.2).to(steps[i],{autoAlpha:1,y:0,duration:.4},i)}
+  tl.to('#phone',{rotationY:p[0],rotationX:p[1],duration:1},i)});
+ tl.to({},{duration:.3});
+
+ gsap.to('#m1',{x:()=>-(innerWidth*1.1),ease:'none',scrollTrigger:{trigger:'.band',start:'top bottom',end:'bottom top',scrub:true}});
+ gsap.fromTo('#m2',{x:()=>-(innerWidth*1.1)},{x:0,ease:'none',scrollTrigger:{trigger:'.band',start:'top bottom',end:'bottom top',scrub:true}});
+ gsap.from('.rc',{y:100,opacity:0,rotationX:-25,stagger:.12,duration:1,ease:'power3.out',scrollTrigger:{trigger:'.cards',start:'top 80%'}});
+ gsap.from('.roles h2',{y:50,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:'.roles',start:'top 75%'}});
+ gsap.from('.plans h2,.plans .sub,.tog',{y:50,opacity:0,stagger:.1,duration:.9,ease:'power3.out',scrollTrigger:{trigger:'.plans',start:'top 75%'}});
+ gsap.from('.pc',{y:90,opacity:0,stagger:.14,duration:1,ease:'power3.out',scrollTrigger:{trigger:'.pcards',start:'top 82%'}});
+ $$('.cta .box').forEach(b=>gsap.from(b,{y:90,scale:.94,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:b,start:'top 85%'}}));
+ $$('[data-n]').forEach(el=>{const n=+el.dataset.n,o={v:0};ScrollTrigger.create({trigger:el,start:'top 90%',once:true,onEnter:()=>gsap.to(o,{v:n,duration:1.4,ease:'power2.out',onUpdate:()=>el.textContent=Math.round(o.v)})})});
+ /* effetti sul puntatore */
+ if(matchMedia('(pointer:fine)').matches){
+  $$('.mag').forEach(b=>{b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();gsap.to(b,{x:(e.clientX-r.left-r.width/2)*.3,y:(e.clientY-r.top-r.height/2)*.4,duration:.3})});b.addEventListener('pointerleave',()=>gsap.to(b,{x:0,y:0,duration:.6,ease:'elastic.out(1,.4)'}))});
+  $$('.rc').forEach(c=>{c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();gsap.to(c,{rotationY:((e.clientX-r.left)/r.width-.5)*14,rotationX:-((e.clientY-r.top)/r.height-.5)*14,duration:.3})});c.addEventListener('pointerleave',()=>gsap.to(c,{rotationX:0,rotationY:0,duration:.5}))});
+ }
+}else{$$('[data-n]').forEach(el=>el.textContent=el.dataset.n)}
+$$('.tog button').forEach(b=>b.onclick=()=>{const y=b.dataset.b==='y';$$('.tog button').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});$('#pp').textContent=y?'23,99':'2,99';$('#pper').textContent=y?'/anno':'/mese'});
+</script>
+</body>
+</html>
